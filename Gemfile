@@ -32,6 +32,7 @@ gem 'devise'
 gem 'sass-rails', '~> 6.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
+gem "jsonapi-serializer"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

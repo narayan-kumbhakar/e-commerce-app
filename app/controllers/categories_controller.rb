@@ -4,7 +4,8 @@ class CategoriesController < ApplicationController
 
     def index
         @categories = Category.all
-        render json: @categories, status: :ok
+
+        render(json: CategorySerializer.new(@categories).serializable_hash.to_json)
     end
 
     def show
