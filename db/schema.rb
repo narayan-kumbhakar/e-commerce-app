@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_28_064855) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_29_112621) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -69,9 +69,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_064855) do
     t.integer "quantity"
     t.integer "product_id"
     t.integer "cart_id"
-    t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order_id"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -89,11 +89,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_064855) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "status"
+    t.integer "status"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.string "transaction_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -122,5 +131,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_064855) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "carts", "users"
   add_foreign_key "orders", "users"
+  add_foreign_key "payments", "orders"
   add_foreign_key "products", "categories"
 end
