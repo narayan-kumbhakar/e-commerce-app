@@ -19,7 +19,7 @@ class PaymentsController < ApplicationController
         render json: @payment
     end
 
-    private
+    private 
 
     def payment_params
         params.permit(:status, :order_id)
